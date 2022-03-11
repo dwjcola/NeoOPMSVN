@@ -1,0 +1,92 @@
+syntax="proto3";
+
+option java_package = "com.neo.proto";
+option java_outer_classname = "CommonMessage";
+
+message StringParam{
+	string param		= 1;
+}
+
+message UserResource{
+	int64 r1			= 1;
+	int64 r2		  = 2;
+	int64 r3			= 3;
+}
+
+message ItemSpec{
+	int32 itemId 		= 1;
+	int32 itemCount	= 2;
+}
+
+message BuffInfo{
+	int32 buffId			= 1;
+	int64 value			= 2;
+}
+
+message BoolInfo{
+	bool value	= 1;
+}
+
+message IntInfo{
+	int32 value	= 1;
+}
+
+message LongInfo{
+	int64 value	= 1;
+}
+
+message IntArrayInfo{
+	repeated int32 array	= 1;
+}
+
+message LongArrayInfo{
+	repeated int64 array	= 1;
+}
+
+message Timer {
+	int32 id				= 1;
+	int32 start			= 2;
+	int32 end				= 3;
+	string para1			= 4;
+	string para2			= 5;
+}
+
+message TimerList {
+	repeated Timer timer			= 1;
+}
+
+message KeyValue {
+	string key				= 1;
+	string value			= 2;
+}
+
+message StringParamList {
+	repeated string params		= 1;
+}
+
+//Reward奖励格式
+message RewardItem {
+	int32 type	=	1;
+	int32 id	=	2;
+	int32 num	=	3;
+}
+
+//背包里的道具
+message BagItem {
+	int32 itemId	=	1;
+	int32 num	=	2;
+}
+
+//背包里的装备
+message EquipmentItem {
+	int32 equipmentId	=	1;
+	string id	=	2;
+	int64 uid = 3;
+}
+
+//玩家资源信息
+message UserProperty {
+	int32 propertyId = 1;
+	int32 propertyNum = 2;
+	int64 uid = 3;
+}

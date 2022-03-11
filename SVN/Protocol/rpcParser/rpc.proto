@@ -1,0 +1,19 @@
+syntax = "proto3";
+package SLG;
+import "Init.proto";
+  // xffsd
+service Client{ 
+    rpc OnChat(int64 xyz,int32) returns; 
+    rpc OnTest() returns json;
+}
+
+service gbCenter_Remote {
+    rpc OnLogin(UserLoginInfo) returns LoginRet;
+}
+
+service gbCenter_Remote {
+    rpc OnLogin(UserLoginInfo) returns LoginRet;
+}
+service wfGate_Handler {
+  rpc EnterServer(UserLoginInfo) returns LoginRet;
+}

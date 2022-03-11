@@ -1,0 +1,21 @@
+
+syntax = "proto3";
+ package NeoOPM;
+ import "msg.proto";
+service test_Handler_200{
+ rpc Test1(MessageTest) returns (MessageTest) ;//pb--pb
+ rpc Test2() returns (MessageTest) ;//void--pb
+ rpc Test3(int32) returns (MessageTest) ;//buildin--pb
+ rpc Test4(MessageTest2) returns (int32) ;//pb--buildin
+ rpc Test5() returns (int32) ;//void--buildin
+ rpc Test6(int32) returns (int32) ;//-buildin--buildin
+ }
+
+service server_event_1{
+ rpc Login(LoginReq) returns (LoginResp) ;//登录
+ }
+ 
+//背包模块
+service bag_Handler_1000{
+ rpc UseItem(UseItemReq) returns (UseItemResp) ;//使用道具
+}

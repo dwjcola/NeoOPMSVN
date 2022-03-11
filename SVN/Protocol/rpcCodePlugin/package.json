@@ -1,0 +1,31 @@
+{
+    "name": "jjrpc",
+    "displayName": "jjrpc",
+    "description": "rpc ",
+    "version": "0.0.5",
+    "publisher": "jj-libl",
+    "engines": {
+        "vscode": "^1.50.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "main": "./extension.js",
+    "activationEvents": [
+        "onLanguage:rpc",
+        "onFileSystem:"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "rpc",
+            "aliases": ["rpc", "rpc"],
+            "extensions": [".rpc"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "rpc",
+            "scopeName": "source.rpc",
+            "path": "./syntaxes/rpc.tmLanguage.json"
+        }]
+    }
+}

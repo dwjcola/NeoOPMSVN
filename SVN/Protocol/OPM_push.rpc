@@ -1,0 +1,7 @@
+
+syntax = "proto3";
+ package NeoOPM;
+import "msg.proto";
+service Client_500{
+ rpc OnEvent1(MessageTest) returns;//注释1
+ }

@@ -1,0 +1,17 @@
+Default 	默认
+Ground  	地表
+WidgetBack  后面装饰物（显示在地表前面角色后面的树，山，建筑等等）
+Role        角色和角色特效
+RoleMask    角色遮罩
+RoleShow	展示角色（比如放大招时，单独凸显角色）
+WidgetFront	前面装饰物（显示在角色前面的树，山，建筑等等）
+
+
+
+
+
+
+   
+
+
+

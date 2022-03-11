@@ -1,0 +1,215 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "rpc",
+	"patterns": [
+		{
+			"include": "#comment"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#import"
+		},
+		{
+			"include": "#service"
+		},
+		{
+			"include": "#package"
+		},
+		{
+			"include": "#syntax"
+		}
+	],
+	"repository": {
+		"comment":{
+			"match": "//.*",
+			"name":"comment"
+		},
+		"package":{
+			"match": "(\\bpackage\\b)\\s+(\\w+)",
+			"captures": {
+				"1":{"name":"variable.language"},
+				"2":{"name":"string.quoted"}
+			}
+		},
+		"syntax":{
+			"match": "\\bsyntax\\b",
+			"name":"variable.language"
+		},
+
+
+
+
+		"service":{
+			"begin": "(\\bservice\\b)\\s+([\\w\\.]*)\\s*{",
+			"beginCaptures": {
+				"1":{"name":"variable.language"},
+				"2":{"name":"variable.name"}
+			},
+			"end": "}",
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#rpc"
+				}
+			]
+		},
+
+		"rpc":{
+			"begin": "(rpc)\\s+(\\w*)",
+			"beginCaptures": {
+				"1":{"name":"keyword.control"},
+				"2":{"name":"entity.name.function"}
+			},
+			"end": ";",
+			"patterns": [
+				{
+					"include": "#return"
+				},
+				{
+					"include": "#params"
+				}
+			]
+		},
+
+		"return":{
+			"begin": "(returns)",
+			"beginCaptures": {"1":{"name":"keyword.control"}},
+			"end": "(?=;)",
+			"patterns": [{
+				"include": "#intype"
+				},
+				{
+					"match": "\\w+",
+					"name":"entity.name.type"	
+				}
+			]
+
+
+		},
+		"intype":{
+			"match": "int32|uint32|int64|uint64|int16|uint16|char|byte|bool|string|json",
+			"name":"constant.numeric"
+		},
+		"params":{
+			"begin": "(\\()",
+			"end": "(\\))",
+			"patterns": [
+				{
+					"include": "#intype"
+				},
+				{
+					"match": "(?<!\\w+\\s+)(\\b\\w+)",
+					"name":"entity.name.type"
+				}
+
+			]
+
+		},
+
+		"import":{
+			"name":"keyword.control",
+			"match": "\\b(import)\\b"
+		},
+		
+		"strings": {
+			"name": "string.quoted.double.rpc",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.rpc",
+					"match": "\\\\."
+				}
+			]
+		},
+		"test":{
+			"patterns": [
+				{
+					"name":"entity.name.class",
+					"match": "class"
+				},
+				{
+					"name":"entity.name.function",
+					"match": "function"
+				},
+				{
+					"name":"entity.name.method",
+					"match": "method"
+				},
+				{
+					"name":"entity.name.type",
+					"match": "type"
+				},
+
+				{
+					"name":"entity.name.section",
+					"match": "section"
+				},
+				{
+					"name":"entity.other",
+					"match": "other"
+				},
+
+				{
+					"name":"entity.other.attribute-name",
+					"match": "attr"
+				},
+				{
+					"name":"entity.other.inherited-class",
+					"match": "child"
+				},
+
+				{
+					"name":"keyword.operator",
+					"match": "op"
+				},
+				{
+					"name":"variable",
+					"match": "var"
+				},
+
+				{
+					"name":"variable.parameter",
+					"match": "param"
+				},
+				{
+					"name":"variable.name",
+					"match": "vname"
+				},
+
+				{
+					"name":"variable.language",
+					"match": "vlan"
+				},
+
+				{
+					"name":"constant.character",
+					"match": "char"
+				},
+				{
+					"name":"constant.language",
+					"match": "clan"
+				},
+
+				{
+					"name":"constant.numeric",
+					"match": "cnum"
+				},
+				{
+					"name":"support.class",
+					"match": "spclass"
+				},
+
+				{
+					"name":"markup.italic",
+					"match": "italic"
+				}
+			]
+		}
+	},
+	"scopeName": "source.rpc"
+}

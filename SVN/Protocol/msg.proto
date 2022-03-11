@@ -1,0 +1,127 @@
+syntax="proto3";
+
+import "common.proto";
+option java_package = "com.neo.proto";
+option java_outer_classname = "StructMessage";
+
+package NeoOPM;
+
+//测试枚举
+enum TestEnum{
+    TEST1 = 0;//注释0
+    TEST2 = 1;//注释1
+    TEST3 = 2;//注释2
+    TEST4 = 3;//注释3
+}
+
+message MessageTest{
+    string value_value_1=1;
+    uint64 value_value_2=2;
+    int32 value_value_3=3;
+    TestEnum value_value_4=4;
+    repeated SubMessage sm = 5;//repeated测试
+    SubMessage sm2 = 6;
+}
+message SubMessage{
+    int32 value_test1 = 1;//注释1
+    int32 value_test2 = 2;//注释2
+    repeated MessageTest2.SubMessage2 sm = 3;//repeated测试
+}
+message MessageTest2{
+    int32 value_test1 = 1;//注释1
+    int32 value_test2 = 2;//注释2
+    message SubMessage2{
+   int32 sb2_value1=1;
+   int32 sb2_value2=2;
+    }
+    SubMessage2 sb=3;
+}
+
+// 玩家登录。req_id：1
+message LoginReq{
+  string uuid             = 1;   //设备uuid
+  string deviceId         = 2;   // device id, not null
+  string lang             = 3;   //语言
+  string packageName      = 4;   //包名
+  string deviceInfo       = 5;   //设备信息
+  string pf               = 6;   // registered platform, eg: telephone, not null
+  string pfId             = 7;   // registered uid on User Center, not null
+  string appVersion       = 8;   // current client version, not null
+  string referrer         = 9;   //推荐人
+  string phoneMode        = 10;  //手机型号
+  string phoneVersion     = 11;  //手机系统版本
+  int32 phoneWidth        = 12;  //手机屏幕宽度
+  int32 phoneHeight       = 13;  //手机屏幕高度
+  int32 serverId          = 14;   // server id on User Center, not null
+  string pfToken          = 15;   // registered users validation on User Center, not null
+  int32 pfState						= 16;   // 0：游客，1：注册未实名，2：已实名
+  string inputIP					= 17;  //ip for test
+}
+
+message LoginServiceResp{
+  int64 uid 			= 1;
+  int32 serverId		= 2;
+  int32 dbId			= 3;
+  int32 currentSid	= 4;
+  int32 visa_time	= 5;
+  string lang		= 6;
+  string country		= 7;
+  int32 pinCode		= 8;
+  int32 pinType		= 9;
+  string appVersion	= 10;
+  string pf			= 11;
+  string pfId		= 12;
+  string ip			= 13;
+  string referrer	= 14;
+  int32 updateFlag	= 15;
+  string deviceId	= 16;
+  string phoneMode 	= 17;
+  string phoneVersion= 18;
+  int32 phoneWidth	= 19;
+  int32 phoneHeight	= 20;
+  bool serverChanged = 21;
+}
+
+// 玩家登录。resp_id：1
+message LoginResp{
+  int64 gameUid											= 1;  //玩家ID，主键
+  int64 serverTime									= 2;	//服务器时间戳
+  bool verLow												= 3;  //客户端是否版本过低
+  UserProfile profile								= 4;
+  LoginBagData	bagData								= 5;	//背包模块数据
+  LoginPropertyData	propertyData					= 6;	//资源模块数据
+}
+
+message LoginBagData{
+	repeated	BagItem		goods	=	1;//道具信息
+	repeated	EquipmentItem	equipments	=	2;//装备信息
+}
+
+message LoginPropertyData{
+	repeated	UserProperty	properties	=	1;
+}
+
+message UserProfile{
+  string name					= 1;		//玩家名称
+  int32 level					= 2;		//玩家等级
+  int32 exp						= 3;		//玩家经验值
+  int64 diamond 			= 4;  	//钻石
+  int64 gold      		= 5;  	//金币
+  int64 dust 					= 6;  	//粉尘 对应服务器coin
+  int32 vipExp    		= 7;  	//vip经验
+  int32 vipLevel			= 8;		//vip等级
+  int64 symCrystal		= 9;		//共鸣水晶币
+  int64 disCoin				= 10;		//遣散币
+}
+
+//使用道具请求
+message UseItemReq{
+	int32 itemId	=	1;				//使用的道具id
+	int32 useNum	=	2;				//使用的数量
+	repeated KeyValue selectItemKV = 3;	//类型4、5选择时，选择的奖励下标和数量键值对<奖励下标, 数量>
+}
+
+//使用道具响应
+message UseItemResp{
+	repeated RewardItem	rewards		=	1;		//获得的奖励
+}
